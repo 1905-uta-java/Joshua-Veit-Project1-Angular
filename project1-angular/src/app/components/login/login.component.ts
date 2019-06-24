@@ -11,9 +11,11 @@ export class LoginComponent implements OnInit {
   email: string;
   password: string;
   
-  authToken: AuthToken;
+  authToken;
 
   errorMessage: string;
+
+  closeResult: string;
 
   constructor(private loginService: LoginService) { }
 
@@ -26,16 +28,24 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.email, this.password)
       .then((result) => {
 
-        console.log(`
-        userId: ${result.userId}
-        isManager: ${result.isManager}
-        timestamp: ${result.timestamp}`);
+        console.log(`authToken: ${result}`);
 
         this.authToken = result;
+        sessionStorage.setItem("authToken", result);
 
       }).catch((error) => {
+        
         this.errorMessage = error.error;
         this.authToken = null;
       });
+  }
+
+  getIsManager() {
+
+    
+  }
+
+  shouldShowLogin() {
+    return Boolean(sessionStorage.getItem("authToken"));
   }
 }

@@ -10,12 +10,12 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
   
-  login(email: string, password: string): Promise<AuthToken> {
+  login(email: string, password: string): Promise<any> {
     let body = new HttpParams()
       .set("email", email)
       .set("password", password);
     
-    return this.http.post<AuthToken>(
+    return this.http.post<any>(
         this.url,
         body.toString(),
         {
