@@ -1,3 +1,13 @@
-<p>
-  homepage-manager works!
-</p>
+<div class = "center-text container rounded bg-primary">
+  <!--  I'm using this div to add some uniform padding
+        arround the contents of this container -->
+  <div class = "p-2">
+    <nav class = "navbar navbar-expand-lg text-white">
+      <a class = "nav-item nav-link text-white" routerLink = "profile">View My Profile</a>
+      <a class = "nav-item nav-link text-white" routerLink = "my-requests">View My Requests</a>
+      <a class = "nav-item nav-link text-white" routerLink = "employees">View My Employees</a>
+    </nav>
+    <hr>
+    <router-outlet></router-outlet>
+  </div>
+</div>
