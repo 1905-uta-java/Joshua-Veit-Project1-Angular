@@ -10,6 +10,7 @@ export class HomepageEmployeeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log("employee homepage component");
   }
 
 }

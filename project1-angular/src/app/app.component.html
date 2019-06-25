@@ -6,4 +6,3 @@
 <app-homepage-employee *ngIf = "isLoggedIn() && !isManager()"></app-homepage-employee>
 <app-homepage-manager *ngIf = "isLoggedIn() && isManager()"></app-homepage-manager>
 <button *ngIf = "isLoggedIn()" (click) = "logout()">Logout</button>
-<router-outlet></router-outlet>

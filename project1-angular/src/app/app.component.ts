@@ -10,11 +10,11 @@ export class AppComponent {
   title = 'project1-angular';
 
   isLoggedIn() {
-    return sessionStorage.get("authToken") && sessionStorage.get("userType");
+    return sessionStorage.getItem("authToken") && sessionStorage.getItem("userType");
   }
 
   isManager() {
-    return sessionStorage.get("userType") === "manager";
+    return sessionStorage.getItem("userType") === "manager";
   }
 
   logout() {

@@ -6,7 +6,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 })
 export class LoginService {
 
-  url: string = "http://localhost:8080/Project1/login"
+  url: string = "http://localhost:8080/Project1/login";
 
   constructor(private http: HttpClient) { }
   

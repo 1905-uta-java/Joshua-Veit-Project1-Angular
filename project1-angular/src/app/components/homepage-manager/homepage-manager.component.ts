@@ -10,6 +10,6 @@ export class HomepageManagerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log("manager homepage component");
   }
-
 }

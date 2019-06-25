@@ -1,8 +1,10 @@
-<!-- Login form in the modal body -->
-<form>
-  <label class = "p-2">Email</label>
-  <input type = "text" [(ngModel)] = "email" name = "email">
-  <label class = "p-2">Password</label>
-  <input type = "password" [(ngModel)] = "password" name = "password">
-</form>
-
+<div class = "center-text container bg-primary">
+  <!-- Login form in the modal body -->
+  <form class = "m-2">
+    <label class = "p-2">Email</label>
+    <input type = "text" [(ngModel)] = "email" name = "email">
+    <label class = "p-2">Password</label>
+    <input type = "password" [(ngModel)] = "password" name = "password">
+  </form>
+  <button class = "btn btn-secondary m-2" (click) = "submitLogin()">Login</button>
+</div>
