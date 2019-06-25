@@ -1,0 +1,53 @@
+<hr>
+
+<form *ngIf = "userProfile">
+
+  <h5 class = "text-white">Contact Info</h5>
+
+  <div class = "form-group">
+    <label for = "firstNameInput" class = "text-white">First Name</label>
+    <input type = "text" class = "form-control" id = "firstNameInput" [(ngModel)] = "userProfile.firstName" name = "firstName" [disabled] = "isPending()">
+  </div>
+  
+  <div class = "form-group">
+    <label for = "lastNameInput" class = "text-white">Last Name</label>
+    <input type = "text" class = "form-control" id = "lastNameInput" [(ngModel)] = "userProfile.lastName" name = "lastName" [disabled] = "isPending()">
+  </div>
+
+  <div class = "form-group">
+    <label for = "phoneInput" class = "text-white">Phone Number</label>
+    <input type = "text" class = "form-control" id = "phoneInput" [(ngModel)] = "userProfile.phone" name = "phone" [disabled] = "isPending()">
+  </div>
+
+
+  <h5 class = "text-white">Address</h5>
+
+  <div class = "form-group">
+    <label for = "streetInput" class = "text-white">Street Address</label>
+    <input type = "text" class = "form-control" id = "streetInput" [(ngModel)] = "userProfile.address" name = "address" [disabled] = "isPending()">
+  </div>
+
+  <div class = "form-group">
+    <label for = "cityInput" class = "text-white">City</label>
+    <input type = "text" class = "form-control" id = "cityInput" [(ngModel)] = "userProfile.city" name = "city" [disabled] = "isPending()">
+  </div>
+
+  <div class = "form-group">
+    <label for = "stateInput" class = "text-white">State</label>
+    <input type = "text" class = "form-control" id = "stateInput" [(ngModel)] = "userProfile.state" name = "state" [disabled] = "isPending()">
+  </div>
+
+  <div class = "form-group">
+    <label for = "countryInput" class = "text-white">Country</label>
+    <input type = "text" class = "form-control" id = "countryInput" [(ngModel)] = "userProfile.country" name = "country" [disabled] = "isPending()">
+  </div>
+
+  <div class = "form-group">
+    <label for = "postalCodeInput" class = "text-white">Postal Code</label>
+    <input type = "text" class = "form-control" id = "postalCodeInput" [(ngModel)] = "userProfile.postalCode" name = "postalCode" [disabled] = "isPending()">
+  </div>
+
+  <button class = "pl-3 pr-3 btn btn-light float-right" (click) = "submit()" [disabled] = "isPending()">Submit</button>
+  <br>
+  <br>
+</form>

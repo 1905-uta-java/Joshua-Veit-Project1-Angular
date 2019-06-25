@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-homepage-employee',
@@ -7,10 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageEmployeeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     console.log("employee homepage component init");
+    
+    if(!sessionStorage.getItem("userType") || sessionStorage.getItem("userType") !== "employee"){
+      this.router.navigate(['']);
+    }
+
+    if(this.router.url === '')
+      this.router.navigate(['employee-home']);
   }
 
+  isPending() {
+    return Boolean(sessionStorage.getItem("pending"));
+  }
 }

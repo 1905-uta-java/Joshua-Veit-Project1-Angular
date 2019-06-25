@@ -3,9 +3,10 @@
         arround the contents of this container -->
   <div class = "p-2">
     <nav class = "navbar navbar-expand-lg text-white">
-      <a class = "nav-item nav-link text-white" routerLink = "profile">View My Profile</a>
-      <a class = "nav-item nav-link text-white" routerLink = "my-requests">View My Requests</a>
-      <a class = "nav-item nav-link text-white" routerLink = "employees">View My Employees</a>
+      <button class = "btn btn-link text-white" routerLink = "profile" [disabled] = "isPending()">View My Profile</button>
+      <button class = "btn btn-link text-white" routerLink = "my-requests" [disabled] = "isPending()">View My Requests</button>
+      <button class = "btn btn-link text-white" routerLink = "employees" [disabled] = "isPending()">View My Employees</button>
+      <button class = "btn btn-link text-white" routerLink = "all-employee-requests" [disabled] = "isPending()">View All Employee Requests</button>
     </nav>
     <hr>
     <router-outlet></router-outlet>

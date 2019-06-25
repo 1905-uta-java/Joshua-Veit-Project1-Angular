@@ -12,4 +12,7 @@ export class EmployeesTabComponent implements OnInit {
   ngOnInit() {
   }
 
+  isPending() {
+    return Boolean(sessionStorage.getItem("pending"));
+  }
 }

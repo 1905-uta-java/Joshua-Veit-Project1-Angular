@@ -12,4 +12,7 @@ export class MyRequestsTabComponent implements OnInit {
   ngOnInit() {
   }
 
+  isPending() {
+    return Boolean(sessionStorage.getItem("pending"));
+  }
 }

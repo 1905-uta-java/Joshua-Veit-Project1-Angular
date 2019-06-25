@@ -1,3 +1,12 @@
-<p>
-  homepage-employee works!
-</p>
+<div class = "center-text container rounded bg-primary">
+  <!--  I'm using this div to add some uniform padding
+        arround the contents of this container -->
+  <div class = "p-2">
+    <nav class = "navbar navbar-expand-lg text-white">
+      <button class = "nav-item nav-link text-white" routerLink = "profile" [disabled] = "isPending()">View My Profile</button >
+      <button class = "nav-item nav-link text-white" routerLink = "my-requests" [disabled] = "isPending()">View My Requests</button >
+    </nav>
+    <hr>
+    <router-outlet></router-outlet>
+  </div>
+</div>

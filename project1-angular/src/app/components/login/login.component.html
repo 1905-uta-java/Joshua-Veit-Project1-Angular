@@ -5,15 +5,15 @@
     <form>
       <div class = "form-group">
         <label for = "emailInput" class = "text-white">Email</label>
-        <input type = "email" class = "form-control" id = "emailInput" [(ngModel)] = "email" name = "email">
+        <input type = "email" class = "form-control" id = "emailInput" [(ngModel)] = "email" name = "email" [disabled] = "isPending()">
       </div>
 
       <div class = "form-group">
         <label for = "passwordInput" class = "text-white">Password</label>
-        <input type = "password" class = "form-control" id = "passwordInput" [(ngModel)] = "password" name = "password">
+        <input type = "password" class = "form-control" id = "passwordInput" [(ngModel)] = "password" name = "password" [disabled] = "isPending()">
       </div>
       
-      <button class = "pl-3 pr-3 btn btn-light float-right" (click) = "submitLogin()">Login</button>
+      <button class = "pl-3 pr-3 btn btn-light float-right" (click) = "submitLogin()" [disabled] = "isPending()">Login</button>
       <br>
       <br>
     </form>

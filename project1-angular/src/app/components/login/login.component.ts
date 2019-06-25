@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 import { EmployeeService } from 'src/app/services/employee.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,25 +17,28 @@ export class LoginComponent implements OnInit {
 
   closeResult: string;
 
-  constructor(private loginService: LoginService, private empService: EmployeeService) { }
+  constructor(
+    private loginService: LoginService,
+    private empService: EmployeeService, 
+    private router: Router) { }
 
   ngOnInit() {
     console.log("login component init");
   }
 
   submitLogin() {
+    
     console.log(this.email + " " + this.password);
 
-    this.loginService.login(this.email, this.password)
-      .then((result) => {
+    this.loginService.login(this.email, this.password,
+      (result) => {
 
         console.log(`authToken: ${JSON.stringify(result)}`);
 
         sessionStorage.setItem("authToken", JSON.stringify(result));
-
         this.getIsManager();
 
-      }).catch((error) => {
+      }, (error) => {
         
         console.log(error.error);
       });
@@ -42,26 +46,34 @@ export class LoginComponent implements OnInit {
   
   getIsManager() {
 
-     this.empService.getSubordinates()
-      .then((result) => {
+     this.empService.getSubordinates((result) => {
 
         console.log(`Subordinates ${JSON.stringify(result)}`);
 
         if(!result || result.length == 0) {
           sessionStorage.setItem("userType", "employee");
+          this.router.navigate(['homepage-employee']);
         } else {
           sessionStorage.setItem("userType", "manager");
+          this.router.navigate(['homepage-manager']);
         }
-      })
-      .catch((error) => {
-
-        console.log(error.error);
-
-        sessionStorage.clear();
+      }, (error) => {
+        switch(error.error) {
+          case "invalid authToken":
+              sessionStorage.clear();
+              this.router.navigate(['login']);
+              break;
+          default:
+            console.log("Error Printing" + error.error);
+        }
       });
   }
-
+  
   shouldShowLogin() {
     return Boolean(sessionStorage.getItem("authToken"));
+  }
+  
+  isPending() {
+    return Boolean(sessionStorage.getItem("pending"));
   }
 }

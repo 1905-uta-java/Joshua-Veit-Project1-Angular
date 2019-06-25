@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-homepage-manager',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageManagerComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private router: Router) { }
+  
   ngOnInit() {
     console.log("manager homepage component init");
+  }
+
+  isPending() {
+    return Boolean(sessionStorage.getItem("pending"));
   }
 }

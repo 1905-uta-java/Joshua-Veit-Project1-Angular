@@ -13,6 +13,11 @@ import { MyRequestsTabComponent } from './components/tabs/my-requests-tab/my-req
 import { EmployeeRequestsTabComponent } from './components/tabs/employee-requests-tab/employee-requests-tab.component';
 import { AllEmployeeRequestsTabComponent } from './components/tabs/all-employee-requests-tab/all-employee-requests-tab.component';
 import { EmployeesTabComponent } from './components/tabs/employees-tab/employees-tab.component';
+import { EmployeeHomeTabComponent } from './components/tabs/employee-home-tab/employee-home-tab.component';
+import { ManagerHomeTabComponent } from './components/tabs/manager-home-tab/manager-home-tab.component';
+import { ChangeEmailTabComponent } from './components/tabs/change-email-tab/change-email-tab.component';
+import { ChangePasswordTabComponent } from './components/tabs/change-password-tab/change-password-tab.component';
+import { EditProfileTabComponent } from './components/tabs/edit-profile-tab/edit-profile-tab.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,12 @@ import { EmployeesTabComponent } from './components/tabs/employees-tab/employees
     MyRequestsTabComponent,
     EmployeeRequestsTabComponent,
     AllEmployeeRequestsTabComponent,
-    EmployeesTabComponent
+    EmployeesTabComponent,
+    EmployeeHomeTabComponent,
+    ManagerHomeTabComponent,
+    ChangeEmailTabComponent,
+    ChangePasswordTabComponent,
+    EditProfileTabComponent,
   ],
   imports: [
     BrowserModule,

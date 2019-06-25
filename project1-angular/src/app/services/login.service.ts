@@ -10,18 +10,29 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
   
-  login(email: string, password: string): Promise<any> {
+  login(email: string, password: string, onSuccess: (any) => void, onFailure: (any) => void) {
+    
+    sessionStorage.setItem("pending", "true");
+
     let body = new HttpParams()
       .set("email", email)
       .set("password", password);
     
-    return this.http.post<any>(
+    this.http.post<any>(
         this.url,
         body.toString(),
         {
           headers: new HttpHeaders()
           .set("Content-Type", "application/x-www-form-urlencoded")
         }
-      ).toPromise();
+      ).toPromise()
+      .then((result) => {
+        sessionStorage.removeItem("pending");
+        onSuccess(result);
+      })
+      .catch((error) => {
+        sessionStorage.removeItem("pending");
+        onFailure(error);
+      });
   }
 }

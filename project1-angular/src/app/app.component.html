@@ -2,7 +2,8 @@
 <br>
 <div class = "container bg-primary rounded text-white p-2 text-center"><h1>Reimbursement Request System</h1></div>
 <hr>
-<app-login *ngIf = "!isLoggedIn()"></app-login>
+<router-outlet></router-outlet>
+<!-- <app-login *ngIf = "!isLoggedIn()"></app-login>
 <app-homepage-employee *ngIf = "isLoggedIn() && !isManager()"></app-homepage-employee>
-<app-homepage-manager *ngIf = "isLoggedIn() && isManager()"></app-homepage-manager>
-<button *ngIf = "isLoggedIn()" (click) = "logout()">Logout</button>
+<app-homepage-manager *ngIf = "isLoggedIn() && isManager()"></app-homepage-manager> -->
+<button *ngIf = "isLoggedIn()" (click) = "logout()" [disabled] = "isPending()">Logout</button>
