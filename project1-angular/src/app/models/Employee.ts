@@ -6,8 +6,6 @@ export interface Employee {
 	managerID: number,
 	email: string,
 	phone: string,
-	passwordHash,
-	passwordSalt,
 	hireDate: Date,
 	address: string,
 	city: string,
