@@ -11,7 +11,6 @@ import { HomepageManagerComponent } from './components/homepage-manager/homepage
 import { ProfileTabComponent } from './components/tabs/profile-tab/profile-tab.component';
 import { MyRequestsTabComponent } from './components/tabs/my-requests-tab/my-requests-tab.component';
 import { EmployeeRequestsTabComponent } from './components/tabs/employee-requests-tab/employee-requests-tab.component';
-import { AllEmployeeRequestsTabComponent } from './components/tabs/all-employee-requests-tab/all-employee-requests-tab.component';
 import { EmployeesTabComponent } from './components/tabs/employees-tab/employees-tab.component';
 import { EmployeeHomeTabComponent } from './components/tabs/employee-home-tab/employee-home-tab.component';
 import { ManagerHomeTabComponent } from './components/tabs/manager-home-tab/manager-home-tab.component';
@@ -28,7 +27,6 @@ import { EditProfileTabComponent } from './components/tabs/edit-profile-tab/edit
     ProfileTabComponent,
     MyRequestsTabComponent,
     EmployeeRequestsTabComponent,
-    AllEmployeeRequestsTabComponent,
     EmployeesTabComponent,
     EmployeeHomeTabComponent,
     ManagerHomeTabComponent,

@@ -1,7 +1,49 @@
-<p>
-  my-requests-tab works!
-  <br>
-  <br>
-  <br>
-  I got a couple line breaks here, but the employees tab has more.
-</p>
+
+<button class = "btn mb-2 mr-1" [ngClass] = "showPending ? 'btn-light' : 'btn-primary'" (click) = "showPending = true" [disabled] = "isPending()">Show Pending Requests</button>
+<button class = "btn mb-2 ml-1" [ngClass] = "showPending ? 'btn-primary' : 'btn-light'" (click) = "showPending = false" [disabled] = "isPending()">Show Resolved Requests</button>
+<h3 class = "text-white" *ngIf = "showPending">Pending Requests</h3>
+<h3 class = "text-white" *ngIf = "!showPending">Resolved Requests</h3>
+<div *ngIf = "showPending">
+  <table class = "table bg-white">
+    <tr>
+      <th>Request ID</th>
+      <th>Amount</th>
+      <th>Date Requested</th>
+    </tr>
+    <tr *ngFor = "let request of pendingRequests">
+      <td>{{request.requestID}}</td>
+      <td>{{request.amount | currency}}</td>
+      <td>{{request.dateRequested | date: "MM/dd/yyyy"}}</td>
+    </tr>
+  </table>
+
+  <form class = "mb-2">
+    <h5 class = "text-white">Submit New Reimbursement Request</h5>
+
+    <div class = "input-group">
+      <label for = "amountInput" class = "text-white">Amount:  $</label>
+      <input type = "number" class = "rounded ml-1 mr-2" id = "amountInput" [(ngModel)] = "newAmount" name = "amount" [disabled] = "isPending()">
+      <span class="input-group-btn">
+        <button class = "ml-1 btn btn-light" (click) = "submit()" [disabled] = "isPending()">Submit</button>
+      </span>
+    </div>
+  </form>
+</div>
+<div *ngIf = "!showPending">
+  <table class = "table bg-white">
+      <tr>
+          <th>Request ID</th>
+          <th>Amount</th>
+          <th>Date Requested</th>
+          <th>Manager ID</th>
+          <th>Approved</th>
+        </tr>
+        <tr *ngFor = "let request of resolvedRequests">
+          <td>{{request.requestID}}</td>
+          <td>{{request.amount | currency}}</td>
+          <td>{{request.dateRequested | date: "MM/dd/yyyy"}}</td>
+          <td>{{request.managerID}}</td>
+          <td>{{request.wasApproved}}</td>
+        </tr>
+  </table>
+</div>

@@ -1,0 +1,9 @@
+.my-scrollbar {
+    position: relative;
+    height: 200px;
+    overflow: auto;
+}
+
+.table-wrapper-scroll-x {
+    display: block;
+}

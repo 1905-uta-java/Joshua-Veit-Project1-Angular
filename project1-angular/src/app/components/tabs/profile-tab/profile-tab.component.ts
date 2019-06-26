@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Employee } from 'src/app/models/employee';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Router } from '@angular/router';
 
@@ -9,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile-tab.component.css']
 })
 export class ProfileTabComponent implements OnInit {
-
+  
   constructor(private empService: EmployeeService, private router: Router) { }
 
   ngOnInit() {

@@ -4,7 +4,6 @@ import { ProfileTabComponent } from './components/tabs/profile-tab/profile-tab.c
 import { MyRequestsTabComponent } from './components/tabs/my-requests-tab/my-requests-tab.component';
 import { EmployeesTabComponent } from './components/tabs/employees-tab/employees-tab.component';
 import { EmployeeRequestsTabComponent } from './components/tabs/employee-requests-tab/employee-requests-tab.component';
-import { AllEmployeeRequestsTabComponent } from './components/tabs/all-employee-requests-tab/all-employee-requests-tab.component';
 import { EmployeeHomeTabComponent } from './components/tabs/employee-home-tab/employee-home-tab.component';
 import { ManagerHomeTabComponent } from './components/tabs/manager-home-tab/manager-home-tab.component';
 import { LoginComponent } from './components/login/login.component';
@@ -54,10 +53,6 @@ const routes: Routes = [
         component: EmployeeRequestsTabComponent
       },
       {
-        path: "all-employee-requests",
-        component: AllEmployeeRequestsTabComponent
-      },
-      {
         path: "",
         component: ManagerHomeTabComponent
       }
@@ -88,18 +83,6 @@ const routes: Routes = [
       {
         path: "my-requests",
         component: MyRequestsTabComponent
-      },
-      {
-        path: "employees",
-        component: EmployeesTabComponent
-      },
-      {
-        path: "employee-requests",
-        component: EmployeeRequestsTabComponent
-      },
-      {
-        path: "all-employee-requests",
-        component: AllEmployeeRequestsTabComponent
       },
       {
         path: "",

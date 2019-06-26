@@ -1,13 +1,94 @@
-<p>
-  employees-tab works!
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  Here are some line breaks. I hope you like them.
-</p>
+<div class = "table-wrapper-scroll-x my-scrollbar">
+  <table class = "table bg-white" style = "font-size: 11px">
+    <thead>
+      <tr>
+        <th>Employee ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Title</th>
+        <th>Manager ID</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Hire Date</th>
+        <th>Street Address</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Country</th>
+        <th>Postal Code</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let employee of employees">
+        <td>{{employee.employeeID}}</td>
+        <td>{{employee.firstName}}</td>
+        <td>{{employee.lastName}}</td>
+        <td>{{employee.title}}</td>
+        <td>{{employee.managerID}}</td>
+        <td>{{employee.email}}</td>
+        <td>{{employee.phone}}</td>
+        <td>{{employee.hireDate | date: "MM/dd/yyyy"}}</td>
+        <td>{{employee.address}}</td>
+        <td>{{employee.city}}</td>
+        <td>{{employee.state}}</td>
+        <td>{{employee.country}}</td>
+        <td>{{employee.postalCode}}</td>
+        <td><button class = "btn btn-primary" style = "font-size: 11px" (click) = "selectEmployee(employee)" [disabled] = "isPending()">View Requests</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<hr>
+<div *ngIf = "pendingRequests || resolvedRequests">
+  <button class = "btn mb-2 mr-1" [ngClass] = "showPending ? 'btn-light' : 'btn-primary'" (click) = "showPending = true" [disabled] = "isPending()">Show Pending Requests</button>
+  <button class = "btn mb-2 ml-1" [ngClass] = "showPending ? 'btn-primary' : 'btn-light'" (click) = "showPending = false" [disabled] = "isPending()">Show Resolved Requests</button>
+  <button class = "btn btn-light float-right" (click) = "confirm()" [disabled] = "isPending()">Confirm</button>
+  <h3 class = "text-white" *ngIf = "showPending">Pending Requests</h3>
+  <h3 class = "text-white" *ngIf = "!showPending">Resolved Requests</h3>
+  <div *ngIf = "showPending"  class = "table-wrapper-scroll-x my-scrollbar">
+    <table class = "table bg-white">
+      <thead>
+        <tr>
+          <th>Request ID</th>
+          <th>Employee ID</th>
+          <th>Amount</th>
+          <th>Date Requested</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor = "let request of pendingRequests">
+          <td>{{request.requestID}}</td>
+          <td>{{request.employeeID}}</td>
+          <td>{{request.amount | currency}}</td>
+          <td>{{request.dateRequested | date: "MM/dd/yyyy"}}</td>
+          <td><button class = "btn" [ngClass] = "isRejected(request) ? 'btn-secondary' : 'btn-success'" (click) = "stageForApproval(request)" [disabled] = "isPending()">Approve</button></td>
+          <td><button class = "btn" [ngClass] = "isApproved(request) ? 'btn-secondary' : 'btn-danger'" (click) = "stageForRejection(request)" [disabled] = "isPending()">Reject</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf = "!showPending"  class = "table-wrapper-scroll-x my-scrollbar">
+    <table class = "table bg-white">
+      <thead>
+        <tr>
+          <th>Request ID</th>
+          <th>Employee ID</th>
+          <th>Amount</th>
+          <th>Date Requested</th>
+          <th>Manager ID</th>
+          <th>Approved</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor = "let request of resolvedRequests">
+          <td>{{request.requestID}}</td>
+          <td>{{request.employeeID}}</td>
+          <td>{{request.amount | currency}}</td>
+          <td>{{request.dateRequested | date: "MM/dd/yyyy"}}</td>
+          <td>{{request.managerID}}</td>
+          <td>{{request.wasApproved}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
