@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PendingRequestService } from 'src/app/services/pending-request.service';
 
 @Component({
   selector: 'app-manager-home-tab',
@@ -7,12 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManagerHomeTabComponent implements OnInit {
 
-  constructor() { }
+  isPending: boolean = false;
+
+  constructor(private pendingService: PendingRequestService) { }
 
   ngOnInit() {
-  }
 
-  isPending() {
-    return Boolean(sessionStorage.getItem("pending"));
+    this.pendingService.setIsPendingEvent.subscribe((value: boolean) => {
+        setTimeout(() => {
+          this.isPending = value
+        })
+      });
   }
 }

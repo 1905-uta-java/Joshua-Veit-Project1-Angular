@@ -3,10 +3,10 @@
         arround the contents of this container -->
   <div class = "p-2">
     <nav class = "navbar navbar-expand-lg text-white">
-      <button class = "btn btn-link text-white" routerLink = "profile" [disabled] = "isPending()">View My Profile</button>
-      <button class = "btn btn-link text-white" routerLink = "my-requests" *ngIf = "getCachedUserProfile() && getCachedUserProfile().managerID !== 0" [disabled] = "isPending()">View My Requests</button>
-      <button class = "btn btn-link text-white" routerLink = "employees" [disabled] = "isPending()">View My Employees</button>
-      <button class = "btn btn-link text-white" routerLink = "employee-requests" [disabled] = "isPending()">View All Employee Requests</button>
+      <button class = "btn btn-link text-white" routerLink = "profile" [disabled] = "isPending">View My Profile</button>
+      <button class = "btn btn-link text-white" routerLink = "my-requests" *ngIf = "getCachedUserProfile() && getCachedUserProfile().managerID !== 0" [disabled] = "isPending">View My Requests</button>
+      <button class = "btn btn-link text-white" routerLink = "employees" [disabled] = "isPending">View My Employees</button>
+      <button class = "btn btn-link text-white" routerLink = "employee-requests" [disabled] = "isPending">View All Employee Requests</button>
     </nav>
     <hr>
     <router-outlet></router-outlet>

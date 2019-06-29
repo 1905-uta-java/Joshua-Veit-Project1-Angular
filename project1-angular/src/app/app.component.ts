@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PendingRequestService } from './services/pending-request.service';
 
 @Component({
   selector: 'app-root',
@@ -9,8 +10,9 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   
   title = 'project1-angular';
+  isPending: boolean = false;
 
-  constructor(private router: Router){}
+  constructor(private router: Router, private pendingService: PendingRequestService){}
 
   ngOnInit() {
     if(!this.isLoggedIn()){
@@ -20,6 +22,12 @@ export class AppComponent implements OnInit {
     } else {
       this.router.navigate(['homepage-employee']);
     }
+
+    this.pendingService.setIsPendingEvent.subscribe((value: boolean) => {
+        setTimeout(() => {
+          this.isPending = value
+        })
+      });
   }
 
   isLoggedIn() {
@@ -33,9 +41,5 @@ export class AppComponent implements OnInit {
   logout() {
     sessionStorage.clear();
     this.router.navigate(['login']);
-  }
-
-  isPending() {
-    return Boolean(sessionStorage.getItem("pending"));
   }
 }

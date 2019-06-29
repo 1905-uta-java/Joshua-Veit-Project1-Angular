@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Employee } from 'src/app/models/employee';
 import { Router } from '@angular/router';
+import { PendingRequestService } from 'src/app/services/pending-request.service';
 
 @Component({
   selector: 'app-change-email-tab',
@@ -10,13 +11,19 @@ import { Router } from '@angular/router';
 })
 export class ChangeEmailTabComponent implements OnInit {
 
+  isPending: boolean = false;
   errorMessage: string;
   email: string;
   password: string;
 
-  constructor(private empService: EmployeeService, private router: Router) { }
+  constructor(private empService: EmployeeService, private router: Router, private pendingService: PendingRequestService) { }
   
   ngOnInit() {
+    this.pendingService.setIsPendingEvent.subscribe((value: boolean) => {
+        setTimeout(() => {
+          this.isPending = value
+        })
+      });
     this.getUserProfile();
   }
 
@@ -109,9 +116,5 @@ export class ChangeEmailTabComponent implements OnInit {
     let result = email.match(`^[a-z0-9]+((\\-|\\.|_)?([a-z0-9]|\\d))*@[a-z0-9]+\\.[a-z0-9]+$`)
 
     return Boolean(result && result.indexOf(email) > -1);
-  }
-
-  isPending() {
-    return Boolean(sessionStorage.getItem("pending"));
   }
 }

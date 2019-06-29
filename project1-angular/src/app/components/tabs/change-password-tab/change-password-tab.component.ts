@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Router } from '@angular/router';
+import { PendingRequestService } from 'src/app/services/pending-request.service';
 
 @Component({
   selector: 'app-change-password-tab',
@@ -15,9 +16,18 @@ export class ChangePasswordTabComponent implements OnInit {
   newPassword1: string;
   newPassword2: string;
 
-  constructor(private empService: EmployeeService, private router: Router) { }
+  isPending: boolean = false;
+
+  constructor(private empService: EmployeeService, private router: Router, private pendingService: PendingRequestService) { }
 
   ngOnInit() {
+
+    this.pendingService.setIsPendingEvent.subscribe((value: boolean) => {
+        setTimeout(() => {
+          this.isPending = value
+        })
+      });
+
     this.oldPassword = null;
     this.newPassword1 = null;
     this.newPassword2 = null;
@@ -91,9 +101,5 @@ export class ChangePasswordTabComponent implements OnInit {
 
   doPasswordsMatch(password1: string, password2: string) {
     return password1 === password2;
-  }
-
-  isPending() {
-    return Boolean(sessionStorage.getItem("pending"));
   }
 }

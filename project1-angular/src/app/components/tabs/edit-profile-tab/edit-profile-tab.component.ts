@@ -2,6 +2,7 @@ import { Component, OnInit, Output } from '@angular/core';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Router } from '@angular/router';
 import { Employee } from 'src/app/models/employee';
+import { PendingRequestService } from 'src/app/services/pending-request.service';
 
 @Component({
   selector: 'app-edit-profile-tab',
@@ -12,9 +13,18 @@ export class EditProfileTabComponent implements OnInit {
 
   userProfile: Employee;
 
-  constructor(private empService: EmployeeService, private router: Router) { }
+  isPending: boolean = false;
+
+  constructor(private empService: EmployeeService, private router: Router, private pendingService: PendingRequestService) { }
   
   ngOnInit() {
+
+    this.pendingService.setIsPendingEvent.subscribe((value: boolean) => {
+        setTimeout(() => {
+          this.isPending = value
+        })
+      });
+
     this.getUserProfile();
   }
 
@@ -58,9 +68,5 @@ export class EditProfileTabComponent implements OnInit {
             console.log(error.error);
         }
       });
-  }
-
-  isPending() {
-    return Boolean(sessionStorage.getItem("pending"));
   }
 }

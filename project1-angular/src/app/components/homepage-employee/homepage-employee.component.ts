@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PendingRequestService } from 'src/app/services/pending-request.service';
 
 @Component({
   selector: 'app-homepage-employee',
@@ -8,7 +9,9 @@ import { Router } from '@angular/router';
 })
 export class HomepageEmployeeComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  isPending: boolean = false;
+
+  constructor(private router: Router, private pendingService: PendingRequestService) { }
 
   ngOnInit() {
     console.log("employee homepage component init");
@@ -19,9 +22,11 @@ export class HomepageEmployeeComponent implements OnInit {
 
     if(this.router.url === '')
       this.router.navigate(['employee-home']);
-  }
-
-  isPending() {
-    return Boolean(sessionStorage.getItem("pending"));
+    
+    this.pendingService.setIsPendingEvent.subscribe((value: boolean) => {
+        setTimeout(() => {
+          this.isPending = value
+        })
+      });
   }
 }

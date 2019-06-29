@@ -4,6 +4,7 @@ import { EmployeeService } from 'src/app/services/employee.service';
 import { ReimbursementRequestService } from 'src/app/services/reimbursement-request.service';
 import { Router } from '@angular/router';
 import { ReimbursementRequest } from 'src/app/models/ReimbursementRequest';
+import { PendingRequestService } from 'src/app/services/pending-request.service';
 
 @Component({
   selector: 'app-employees-tab',
@@ -23,14 +24,22 @@ export class EmployeesTabComponent implements OnInit {
 
   selectedEmployee: Employee;
 
-  constructor(private router: Router ,private empService: EmployeeService, private reqService: ReimbursementRequestService) { }
+  isPending: boolean = false;
+
+  constructor(
+    private router: Router,
+    private empService: EmployeeService,
+    private reqService: ReimbursementRequestService,
+    private pendingService: PendingRequestService) { }
 
   ngOnInit() {
-    this.getSubordinates();
-  }
+    this.pendingService.setIsPendingEvent.subscribe((value: boolean) => {
+        setTimeout(() => {
+          this.isPending = value
+        })
+      });
 
-  isPending() {
-    return Boolean(sessionStorage.getItem("pending"));
+    this.getSubordinates();
   }
 
   getSubordinates() {

@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { ReimbursementRequest } from '../models/ReimbursementRequest';
+import { PendingRequestService } from './pending-request.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReimbursementRequestService {
 
-  url = "http://localhost:8080/Project1/reimbursement";
+  url = "http://ec2-18-218-143-173.us-east-2.compute.amazonaws.com:8080/project1/reimbursement";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private pendingService: PendingRequestService) { }
 
   //get
 
   getUsersRequests(onSuccess: (any) => void, onFailure: (any) => void) {
 
-    sessionStorage.setItem("pending", "true");
+    this.pendingService.setIsPendingEvent.emit(true);
 
     let params = new HttpParams()
       .set("authToken", sessionStorage.getItem("authToken"))
@@ -28,18 +29,18 @@ export class ReimbursementRequestService {
       }
     ).toPromise()
     .then((result) => {
-      sessionStorage.removeItem("pending");
+      this.pendingService.setIsPendingEvent.emit(false);
       onSuccess(result);
     })
     .catch((error) => {
-      sessionStorage.removeItem("pending");
+      this.pendingService.setIsPendingEvent.emit(false);
       onFailure(error);
     });
   }
 
   getSubordinatesRequests(employeeID: number, onSuccess: (any) => void, onFailure: (any) => void) {
 
-    sessionStorage.setItem("pending", "true");
+    this.pendingService.setIsPendingEvent.emit(true);
 
     let params = new HttpParams()
       .set("authToken", sessionStorage.getItem("authToken"))
@@ -53,18 +54,18 @@ export class ReimbursementRequestService {
       }
     ).toPromise()
     .then((result) => {
-      sessionStorage.removeItem("pending");
+      this.pendingService.setIsPendingEvent.emit(false);
       onSuccess(result);
     })
     .catch((error) => {
-      sessionStorage.removeItem("pending");
+      this.pendingService.setIsPendingEvent.emit(false);
       onFailure(error);
     });
   }
 
   getAllSubordinatesRequests(onSuccess: (any) => void, onFailure: (any) => void) {
 
-    sessionStorage.setItem("pending", "true");
+    this.pendingService.setIsPendingEvent.emit(true);
 
     let params = new HttpParams()
       .set("authToken", sessionStorage.getItem("authToken"))
@@ -77,11 +78,11 @@ export class ReimbursementRequestService {
       }
     ).toPromise()
     .then((result) => {
-      sessionStorage.removeItem("pending");
+      this.pendingService.setIsPendingEvent.emit(false);
       onSuccess(result);
     })
     .catch((error) => {
-      sessionStorage.removeItem("pending");
+      this.pendingService.setIsPendingEvent.emit(false);
       onFailure(error);
     });
   }
@@ -90,7 +91,7 @@ export class ReimbursementRequestService {
 
   resolveRequest(requestID: number, approve: boolean, onSuccess: (any) => void, onFailure: (any) => void) {
     
-    sessionStorage.setItem("pending", "true");
+    this.pendingService.setIsPendingEvent.emit(true);
     
     let params = new HttpParams()
       .set("authToken", sessionStorage.getItem("authToken"))
@@ -108,18 +109,18 @@ export class ReimbursementRequestService {
         }
       ).toPromise()
       .then((result) => {
-        sessionStorage.removeItem("pending");
+        this.pendingService.setIsPendingEvent.emit(false);
         onSuccess(result);
       })
       .catch((error) => {
-        sessionStorage.removeItem("pending");
+        this.pendingService.setIsPendingEvent.emit(false);
         onFailure(error);
       });
   }
 
   resolveRequests(requests: ReimbursementRequest[], onSuccess: (any) => void, onFailure: (any) => void) {
     
-    sessionStorage.setItem("pending", "true");
+    this.pendingService.setIsPendingEvent.emit(true);
     
     let params = new HttpParams()
       .set("authToken", sessionStorage.getItem("authToken"))
@@ -136,11 +137,11 @@ export class ReimbursementRequestService {
         }
       ).toPromise()
       .then((result) => {
-        sessionStorage.removeItem("pending");
+        this.pendingService.setIsPendingEvent.emit(false);
         onSuccess(result);
       })
       .catch((error) => {
-        sessionStorage.removeItem("pending");
+        this.pendingService.setIsPendingEvent.emit(false);
         onFailure(error);
       });
   }
@@ -149,7 +150,7 @@ export class ReimbursementRequestService {
 
   submitNewRequest(amount: number, onSuccess: (any) => void, onFailure: (any) => void) {
     
-    sessionStorage.setItem("pending", "true");
+    this.pendingService.setIsPendingEvent.emit(true);
 
     let body = new HttpParams()
       .set("authToken", sessionStorage.getItem("authToken"))
@@ -164,11 +165,11 @@ export class ReimbursementRequestService {
         }
       ).toPromise()
       .then((result) => {
-        sessionStorage.removeItem("pending");
+        this.pendingService.setIsPendingEvent.emit(false);
         onSuccess(result);
       })
       .catch((error) => {
-        sessionStorage.removeItem("pending");
+        this.pendingService.setIsPendingEvent.emit(false);
         onFailure(error);
       });
   }

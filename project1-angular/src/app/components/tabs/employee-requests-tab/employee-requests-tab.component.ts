@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReimbursementRequest } from 'src/app/models/ReimbursementRequest';
 import { Router } from '@angular/router';
 import { ReimbursementRequestService } from 'src/app/services/reimbursement-request.service';
+import { PendingRequestService } from 'src/app/services/pending-request.service';
 
 @Component({
   selector: 'app-employee-requests-tab',
@@ -10,6 +11,8 @@ import { ReimbursementRequestService } from 'src/app/services/reimbursement-requ
 })
 export class EmployeeRequestsTabComponent implements OnInit {
 
+  isPending: boolean = false;
+
   showPending: boolean;
   pendingRequests: ReimbursementRequest[];
   resolvedRequests: ReimbursementRequest[];
@@ -17,14 +20,17 @@ export class EmployeeRequestsTabComponent implements OnInit {
   approvalStagedRequests: ReimbursementRequest[];
   rejectionStagedRequests: ReimbursementRequest[];
 
-  constructor(private router: Router, private reqService: ReimbursementRequestService) { }
+  constructor(private router: Router, private reqService: ReimbursementRequestService, private pendingService: PendingRequestService) { }
 
   ngOnInit() {
-    this.getRequests();
-  }
 
-  isPending() {
-    return Boolean(sessionStorage.getItem("pending"));
+    this.pendingService.setIsPendingEvent.subscribe((value: boolean) => {
+        setTimeout(() => {
+          this.isPending = value
+        })
+      });
+
+    this.getRequests();
   }
 
   getRequests() {

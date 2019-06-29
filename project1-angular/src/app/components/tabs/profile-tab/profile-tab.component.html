@@ -17,9 +17,9 @@
          &nbsp; {{getCachedUserProfile().country}} {{getCachedUserProfile().postalCode}}
     </li>
   </ul>
-  <button class = "btn btn-light mb-2 mr-1" routerLink = "edit-profile" [disabled] = "isPending()">Edit Profile</button>
-  <button class = "btn btn-light mb-2 ml-1 mr-1" routerLink = "change-email" [disabled] = "isPending()">Change Email</button>
-  <button class = "btn btn-light mb-2 ml-1" routerLink = "change-password" [disabled] = "isPending()">Change Password</button>
+  <button class = "btn btn-light mb-2 mr-1" routerLink = "edit-profile" [disabled] = "isPending">Edit Profile</button>
+  <button class = "btn btn-light mb-2 ml-1 mr-1" routerLink = "change-email" [disabled] = "isPending">Change Email</button>
+  <button class = "btn btn-light mb-2 ml-1" routerLink = "change-password" [disabled] = "isPending">Change Password</button>
   
 </div>
 <div class = "text-white"  *ngIf = "!getCachedUserProfile()">

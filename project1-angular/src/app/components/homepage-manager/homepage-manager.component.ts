@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { EmployeeService } from 'src/app/services/employee.service';
+import { PendingRequestService } from 'src/app/services/pending-request.service';
 
 @Component({
   selector: 'app-homepage-manager',
@@ -9,16 +10,21 @@ import { EmployeeService } from 'src/app/services/employee.service';
 })
 export class HomepageManagerComponent implements OnInit {
 
-  constructor(private router: Router, private empService: EmployeeService) { }
+  isPending: boolean = false;
+
+  constructor(private router: Router, private empService: EmployeeService, private pendingService: PendingRequestService) { }
   
   ngOnInit() {
+
+    this.pendingService.setIsPendingEvent.subscribe((value: boolean) => {
+        setTimeout(() => {
+          this.isPending = value
+        })
+      });
+
     console.log("manager homepage component init");
 
     this.getUserProfile();
-  }
-
-  isPending() {
-    return Boolean(sessionStorage.getItem("pending"));
   }
 
   getUserProfile(){
@@ -28,6 +34,8 @@ export class HomepageManagerComponent implements OnInit {
       this.empService.getUserProfile((result) => {
 
           sessionStorage.setItem("userProfile", JSON.stringify(result));
+          
+          console.log(JSON.stringify(result));
 
         }, (error) => {
 

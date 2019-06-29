@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Router } from '@angular/router';
+import { PendingRequestService } from 'src/app/services/pending-request.service';
 
 @Component({
   selector: 'app-login',
@@ -17,13 +18,21 @@ export class LoginComponent implements OnInit {
 
   closeResult: string;
 
+  isPending: boolean = false;
+
   constructor(
     private loginService: LoginService,
     private empService: EmployeeService, 
-    private router: Router) { }
+    private router: Router,
+    private pendingService: PendingRequestService) { }
 
   ngOnInit() {
     console.log("login component init");
+    this.pendingService.setIsPendingEvent.subscribe((value: boolean) => {
+        setTimeout(() => {
+          this.isPending = value
+        })
+      });
   }
 
   submitLogin() {
@@ -71,9 +80,5 @@ export class LoginComponent implements OnInit {
   
   shouldShowLogin() {
     return Boolean(sessionStorage.getItem("authToken"));
-  }
-  
-  isPending() {
-    return Boolean(sessionStorage.getItem("pending"));
   }
 }

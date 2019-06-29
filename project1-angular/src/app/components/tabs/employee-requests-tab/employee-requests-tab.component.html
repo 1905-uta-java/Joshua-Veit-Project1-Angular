@@ -1,6 +1,6 @@
-<button class = "btn mb-2 mr-1" [ngClass] = "showPending ? 'btn-light' : 'btn-primary'" (click) = "showPending = true" [disabled] = "isPending()">Show Pending Requests</button>
-<button class = "btn mb-2 ml-1" [ngClass] = "showPending ? 'btn-primary' : 'btn-light'" (click) = "showPending = false" [disabled] = "isPending()">Show Resolved Requests</button>
-<button class = "btn btn-light float-right" (click) = "confirm()" [disabled] = "isPending()">Confirm</button>
+<button class = "btn mb-2 mr-1" [ngClass] = "showPending ? 'btn-light' : 'btn-primary'" (click) = "showPending = true" [disabled] = "isPending">Show Pending Requests</button>
+<button class = "btn mb-2 ml-1" [ngClass] = "showPending ? 'btn-primary' : 'btn-light'" (click) = "showPending = false" [disabled] = "isPending">Show Resolved Requests</button>
+<button class = "btn btn-light float-right" (click) = "confirm()" [disabled] = "isPending">Confirm</button>
 <h3 class = "text-white" *ngIf = "showPending">Pending Requests</h3>
 <h3 class = "text-white" *ngIf = "!showPending">Resolved Requests</h3>
 <div *ngIf = "showPending"  class = "table-wrapper-scroll-x my-scrollbar">
@@ -19,8 +19,8 @@
         <td>{{request.employeeID}}</td>
         <td>{{request.amount | currency}}</td>
         <td>{{request.dateRequested | date: "MM/dd/yyyy"}}</td>
-        <td><button class = "btn" [ngClass] = "isRejected(request) ? 'btn-secondary' : 'btn-success'" (click) = "stageForApproval(request)" [disabled] = "isPending()">Approve</button></td>
-        <td><button class = "btn" [ngClass] = "isApproved(request) ? 'btn-secondary' : 'btn-danger'" (click) = "stageForRejection(request)" [disabled] = "isPending()">Reject</button></td>
+        <td><button class = "btn" [ngClass] = "isRejected(request) ? 'btn-secondary' : 'btn-success'" (click) = "stageForApproval(request)" [disabled] = "isPending">Approve</button></td>
+        <td><button class = "btn" [ngClass] = "isApproved(request) ? 'btn-secondary' : 'btn-danger'" (click) = "stageForRejection(request)" [disabled] = "isPending">Reject</button></td>
       </tr>
     </tbody>
   </table>
